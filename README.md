@@ -17,6 +17,7 @@ The minimum set of requirements for using `tau` are:
  - C++03 compatible compiler
  - socket I/O support (ability to create sockets, listen on them, send and receive data)
  
+[configuring your C++ project to work with the library](doc/installation.md)
 
 ### Client device
  - Android 3.0 or newer with [tau client](https://play.google.com/store/apps/details?id=com.tau.client) app installed.
