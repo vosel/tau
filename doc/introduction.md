@@ -1,10 +1,10 @@
 # Introduction to `tau` library
 
-This introduction is aimed to demonstrate the basic principals of the library usage. The most code samples here use [boost.asio](http://www.boost.org/doc/libs/1_61_0/doc/html/boost_asio/overview.html) library to implement socket I/O. The description on how to implement your custom I/O logic is also provided in this document (see the [getting rid of boost dependency](#getting-rid-of-boost-asio-dependency) section).
+This introduction is aimed to demonstrate the basic principals of the library usage. The most code samples here use [boost.asio](http://www.boost.org/doc/libs/1_61_0/doc/html/boost_asio/overview.html) library to implement socket I/O. The description on how to implement your custom I/O logic is also provided in this document (see the [getting rid of boost dependency](#-getting-rid-of-boost-dependency) section).
 
 *Note that here, as everywhere else around this documentation, the `tau` library is used in header-only mode (see the difference between header-only and compiled modes in the [installation](installation.md) reference). The location of the library source files is passed to the compiler as `-I` command line parameter.*
 
-### <a name="hello-world"></a> Hello, world
+### Hello, world
 Let's create simplest application with `tau` library.
 
 The purpose of this tutorial is to show how to create the most basic program that uses `tau` library. Also, the tutorial gives instructions on how to build the program, run it, and how to connect to it with the client device.
@@ -101,7 +101,7 @@ Now we need to run the client app on the phone or tablet and connect it to the p
 
 This concludes our first demo application of the `tau` library. Full source for this sample can be found at: [samples/hello_world/boost_asio/main.cpp](samples/hello_world/boost_asio/main.cpp).
 
-### <a name="ui-elems-demo"></a> Demo of the UI elements
+### Demo of the UI elements
 
 The 'hello, world' server in the tutorial above didn't do anything useful, so let's expand it here.
 
@@ -198,7 +198,7 @@ On each modification of data in the input elements on the left, the label next t
 
 This will be demonstrated in the next section. The code for this demo can be found at [samples/ui_elements_demo/boost_asio/main.cpp](samples/ui_elements_demo/boost_asio/main.cpp)
 
-### <a name="server-requests-demo"></a> Server requests demo
+### Server requests demo
 
 The previous example showed how the server program could modify the text for the labels on the client's screen. There are several other operations that server could do on client. These operations are:
  - request values of the inputs at any moment (boolean, numeric, text inputs)
@@ -296,7 +296,7 @@ The UI on client for this server looks like this:
 
 The code for this demo can be found at [samples/server_requests_demo/boost_asio/main.cpp](samples/server_requests_demo/boost_asio/main.cpp)
 
-### <a name="getting-rid-of-boost-asio-dependency"></a> Getting rid of `boost` dependency
+### Getting rid of `boost` dependency
 Let's now implement the socket I/O ourselves. The aim of this tutorial is to show basic principals, on which the the I/O subsystem for `tau` library should be written. 
 
 This tutorial will implement socket I/O for POSIX sockets API. All the I/O code will be located inside `main()` method. The server will be the simplest possible server: it will wait for the one client connection, service the client, and after connection is closed, the server will cause the program to exit.
