@@ -24,23 +24,35 @@ Next, let's create a simple class that will handle callbacks from events, create
 class MyEventsDispatcher : public tau::util::BasicEventsDispatcher
 {
 public:
-    MyEventsDispatcher(tau::communications_handling::OutgiongPacketsGenerator & outgoingPacketsGeneratorToUse)
-        :tau::util::BasicEventsDispatcher(outgoingPacketsGeneratorToUse) {};
+    MyEventsDispatcher(
+        tau::communications_handling::OutgiongPacketsGenerator & outgoingGeneratorToUse): 
+            tau::util::BasicEventsDispatcher(outgoingGeneratorToUse)
+        {};
 
-    void packetReceived_requestProcessingError(std::string const & layoutID, std::string const & additionalData)
+    virtual void packetReceived_requestProcessingError(
+		std::string const & layoutID, std::string const & additionalData)
     {
-        std::cout << "Error received from client:\nLayouID: " << layoutID << "\nError: " << additionalData << "\n";
+        std::cout << "Error received from client:\nLayouID: "
+			<< layoutID << "\nError: " << additionalData << "\n";
     }
 
-    void onClientConnected(tau::communications_handling::ClientConnectionInfo const & connectionInfo)
+    virtual void onClientConnected(
+        tau::communications_handling::ClientConnectionInfo const & connectionInfo)
     {
-        std::cout << "Client connected: remoteAddr: " << connectionInfo.getRemoteAddrDump() << ", localAddr : " << connectionInfo.getLocalAddrDump() << "\n";
+        std::cout << "Client connected: remoteAddr: "
+            << connectionInfo.getRemoteAddrDump()
+            << ", localAddr : "
+            << connectionInfo.getLocalAddrDump() << "\n";
     }
-    void packetReceived_clientDeviceInfo(tau::communications_handling::ClientDeviceInfo const & info) {
+    void packetReceived_clientDeviceInfo(
+        tau::communications_handling::ClientDeviceInfo const & info)
+    {
         using namespace tau::layout_generation;
         std::cout << "Received client information packet\n";
         std::string greetingMessage = "Hello, world!";
-        sendPacket_resetLayout(LayoutInfo().pushLayoutPage(LayoutPage(tau::common::LayoutPageID("FIRST_LAYOUT_PAGE"), LabelElement(greetingMessage))).getJson());
+        sendPacket_resetLayout(LayoutInfo().pushLayoutPage(
+            LayoutPage(tau::common::LayoutPageID("FIRST_LAYOUT_PAGE"),
+            LabelElement(greetingMessage))).getJson());
     }
 };
 ```

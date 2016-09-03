@@ -34,17 +34,25 @@ namespace {
 class MyEventsDispatcher : public tau::util::BasicEventsDispatcher
 {
 public:
-    MyEventsDispatcher(tau::communications_handling::OutgiongPacketsGenerator & outgoingPacketsGeneratorToUse)
-        :tau::util::BasicEventsDispatcher(outgoingPacketsGeneratorToUse) {};
+    MyEventsDispatcher(
+        tau::communications_handling::OutgiongPacketsGenerator & outgoingGeneratorToUse): 
+            tau::util::BasicEventsDispatcher(outgoingGeneratorToUse)
+        {};
 
-    void packetReceived_requestProcessingError(std::string const & layoutID, std::string const & additionalData)
+    virtual void packetReceived_requestProcessingError(
+		std::string const & layoutID, std::string const & additionalData)
     {
-        std::cout << "Error received from client:\nLayouID: " << layoutID << "\nError: " << additionalData << "\n";
+        std::cout << "Error received from client:\nLayouID: "
+			<< layoutID << "\nError: " << additionalData << "\n";
     }
 
-    void onClientConnected(tau::communications_handling::ClientConnectionInfo const & connectionInfo)
+    virtual void onClientConnected(
+        tau::communications_handling::ClientConnectionInfo const & connectionInfo)
     {
-        std::cout << "Client connected: remoteAddr: " << connectionInfo.getRemoteAddrDump() << ", localAddr : " << connectionInfo.getLocalAddrDump() << "\n";
+        std::cout << "Client connected: remoteAddr: "
+            << connectionInfo.getRemoteAddrDump()
+            << ", localAddr : "
+            << connectionInfo.getLocalAddrDump() << "\n";
     }
 private:
     std::string generateLayout(bool notifyServerAboutEdits) {
