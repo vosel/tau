@@ -52,6 +52,7 @@ protected:
 		delegate void MyNativeCallbacksDelegate();
 		MyNativeCallbacksDelegate ^ m_sendDataDelegate;
 		array<unsigned char> ^ m_buffer;
+		void beginReceive();
 	protected:
 		// The pointer is used here because c++/clr classes don't allow normal c++ fields.
 		// So, the clean-up of this object's memory has to be done manually.
@@ -62,7 +63,7 @@ protected:
 	public:
 		DotNetAsyncSession(DotNetAsyncServer ^ parent, System::Net::Sockets::Socket ^ connectionSocket);
 		void receiveCallback(System::IAsyncResult ^ result);
-		void beginReceive();
+		void onClientConnected();
 		void close();
 	private:
 		void send_data_pending_in_native_code();

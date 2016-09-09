@@ -83,6 +83,7 @@ LINKAGE_RESTRICTION void DotNetAsyncServer::acceptCallback(System::IAsyncResult 
 	System::Net::Sockets::Socket ^ connectionSocket = server_socket->EndAccept(result);
 	DotNetAsyncSession ^ nextHandler = create_connection_handler(connectionSocket);
 	clients->Add(nextHandler);
+	nextHandler->onClientConnected();
 	begin_accept_if_allowed_to(); 
 }
 
