@@ -24,3 +24,4 @@ The minimum set of requirements for using `tau` are:
 
 ## Reference, examples, code samples
 [introduction](doc/introduction.md)
+[reference materials](doc/ref/reference.md)
