@@ -129,16 +129,18 @@ LINKAGE_RESTRICTION DotNetAsyncServer::DotNetAsyncSession::DotNetAsyncSession(Do
 
 	m_incomingDataParser =
 		new tau::communications_handling::IncomingDataStreamParser();
+}
 
-	System::Net::IPEndPoint ^ localEndpoint = (System::Net::IPEndPoint ^)connectionSocket->LocalEndPoint;
-	System::Net::IPEndPoint ^ remoteEndpoint = (System::Net::IPEndPoint ^)connectionSocket->RemoteEndPoint;
+LINKAGE_RESTRICTION void DotNetAsyncServer::DotNetAsyncSession::onClientConnected()
+{
+	System::Net::IPEndPoint ^ localEndpoint = (System::Net::IPEndPoint ^)client_socket->LocalEndPoint;
+	System::Net::IPEndPoint ^ remoteEndpoint = (System::Net::IPEndPoint ^)client_socket->RemoteEndPoint;
 
 	tau::communications_handling::ClientConnectionInfo connectionInfo(
 			sysStr2stdStr(remoteEndpoint->Address->ToString()), remoteEndpoint->Port,
 			sysStr2stdStr(localEndpoint->Address->ToString()), localEndpoint->Port);
 
 	getEventsDispatcher()->onClientConnected(connectionInfo);
-
 	beginReceive();
 }
 
