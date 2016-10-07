@@ -10,8 +10,6 @@
 namespace tau {
 namespace communications_handling {
 
-#include <string>
-
 class OutgiongPacketsGenerator
 {
 public:
