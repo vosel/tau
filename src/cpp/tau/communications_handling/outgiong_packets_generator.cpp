@@ -105,6 +105,24 @@ namespace {
 			tau::communications_handling::outgoing_packets_types::SET_ENABLED_FLAG_(), layout_element_id, util_bool2string(isEnabled));
 		sendData(toSend);
 	}
+	
+	LINKAGE_RESTRICTION void OutgiongPacketsGenerator::sendPacket_PutImage(common::ImageID const & imageID, common::ImageResource const & image)
+	{
+		std::stringstream result;
+		image.serialize(result);
+		std::string toSend = generatePacketData(
+			tau::communications_handling::outgoing_packets_types::PUT_IMAGE_(),
+			imageID, result.str());
+		sendData(toSend);
+	}
+
+	LINKAGE_RESTRICTION void OutgiongPacketsGenerator::sendPacket_GetLayoutElementPositionInfo(common::ElementID const & layout_element_id)
+	{
+		std::string toSend = generatePacketData(
+			tau::communications_handling::outgoing_packets_types::GET_LAYOUT_ELEM_POSITION_(),
+			layout_element_id, "");
+		sendData(toSend);
+	}
 }
 }
 #undef LINKAGE_RESTRICTION

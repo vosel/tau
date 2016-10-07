@@ -69,6 +69,12 @@ namespace {
 		void onPacketReceived_LayoutRefreshed(common::LayoutID const & layoutID) OVERRIDE_IDENTIFIER {
 			m_owner->packetReceived_layoutRefreshed(layoutID);
 		}
+		void onPacketReceived_ImageUpdated(common::ImageID const & imageID) {
+			m_owner->packetReceived_imageUpdated(imageID);
+		}
+		void onPacketReceived_LayoutElementPosition(common::ElementID const & elementID, size_t x, size_t y, size_t width, size_t height) {
+			m_owner->packetReceived_layoutElementPosition(elementID, x, y, width, height);
+		}
 		void onPacketReceived_ServerRequestProcessingError(std::string const & layoutID, std::string const & additionalData) OVERRIDE_IDENTIFIER {
 			m_owner->packetReceived_requestProcessingError(layoutID, additionalData);
 		}
@@ -148,6 +154,16 @@ LINKAGE_RESTRICTION void BasicEventsDispatcher::sendPacket_changeShownLayoutPage
 LINKAGE_RESTRICTION void BasicEventsDispatcher::sendPacket_changeElementEnabledState(common::ElementID const & elementID, bool newState)
 {
 	m_outgiongPacketsGenerator.sendPacket_SetEnabled(elementID, newState);
+}
+
+LINKAGE_RESTRICTION void BasicEventsDispatcher::sendPacket_getLayoutElementPositionInfo(common::ElementID const & elementID)
+{
+	m_outgiongPacketsGenerator.sendPacket_GetLayoutElementPositionInfo(elementID);
+}
+
+LINKAGE_RESTRICTION void BasicEventsDispatcher::sendPacket_putImage(common::ImageID const & imageID, common::ImageResource const & image)
+{
+	m_outgiongPacketsGenerator.sendPacket_PutImage(imageID, image);
 }
 
 } //namespace util

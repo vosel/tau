@@ -23,6 +23,8 @@ namespace communications_handling {
 			ServerRequestProcessingError,
 			LayoutRefreshed,
 			LayoutPageSwitched,
+			ImageUpdated,
+			LayoutElementPositionInfo,
 			UnknownPacketType
 		};
 		//This packet is sent when a button is clicked on client.
@@ -59,6 +61,9 @@ namespace communications_handling {
 
 		// This packet is sent to the server by client when (for any reason) the displayed layout page is switched. This may happen either after a server request, or after a specific event on the client itself.
 		static const char * LAYOUT_PAGE_SWITCHED_()				{ static const char * result = "LayoutSheetSwitched";		return result; }
+		
+		static const char * IMAGE_UPDATED_()                    { static const char * result = "ImageUpdated";		return result; }
+		static const char * LAYOUT_ELEMENT_POSITION_INFO_()     { static const char * result = "LayoutElementPositionInfo";		return result; }
 
 		static TypeID getTypeID(std::string const & packet_type_string);
 	};
@@ -74,6 +79,8 @@ namespace communications_handling {
 		static const char * SET_VALUE_FOR_FLOAT_POINT_INPUT_()	{ static const char * result = "SetFloatPointValue";	return result; }
 		static const char * SET_VALUE_FOR_TEXT_INPUT_()			{ static const char * result = "SetTextValue";		return result; }
 		static const char * SET_ENABLED_FLAG_()					{ static const char * result = "SetEnabled";		return result; }
+		static const char * PUT_IMAGE_()						{ static const char * result = "PutImage";	return result; }
+		static const char * GET_LAYOUT_ELEM_POSITION_()		    { static const char * result = "GetLayoutElemPosition";	return result; }
 	};
 }
 }

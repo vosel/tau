@@ -91,6 +91,16 @@ LINKAGE_RESTRICTION void IncomingPacketsHandler::onPacketReceived(
 		case incoming_packets_types::ServerRequestProcessingError:
 			onPacketReceived_ServerRequestProcessingError(layoutElementID, additionalData);
 			break;
+		case incoming_packets_types::ImageUpdated:
+			onPacketReceived_ImageUpdated(common::ImageID(layoutElementID));
+			break;			
+		case incoming_packets_types::LayoutElementPositionInfo: {
+				size_t x = 0, y = 0, width = 0, height = 0;
+				std::stringstream stream(additionalData);
+				stream >> x >> y >> width >> height;
+				onPacketReceived_LayoutElementPosition(common::ElementID(layoutElementID), x, y, width, height);
+			}
+			break;
 		default: 
 			std::stringstream error;
 			error << "Unknown type of packet is received: " << packetType;
@@ -143,6 +153,12 @@ LINKAGE_RESTRICTION void IncomingPacketsHandler::onPacketReceived_LayoutRefreshe
 {}
 
 LINKAGE_RESTRICTION void IncomingPacketsHandler::onPacketReceived_LayoutPageSwitched(common::LayoutPageID const & newActiveLayoutPageID)
+{}
+
+LINKAGE_RESTRICTION void IncomingPacketsHandler::onPacketReceived_ImageUpdated(common::ImageID const & imageID)
+{}
+
+LINKAGE_RESTRICTION void IncomingPacketsHandler::onPacketReceived_LayoutElementPosition(common::ElementID const & imageID, size_t x, size_t y, size_t width, size_t height)
 {}
 
 LINKAGE_RESTRICTION void IncomingPacketsHandler::onPacketReceived_ServerRequestProcessingError(std::string const & layoutID, std::string const & additionalData)

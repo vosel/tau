@@ -69,6 +69,24 @@ LINKAGE_RESTRICTION void EmptySpace::getDeclarationDump(simple_json_builder & ta
 	target.endObject();
 }
 
+LINKAGE_RESTRICTION ImageBoxLayoutElement & ImageBoxLayoutElement::imageID(common::ImageID const & id)
+{
+	m_imageID = id;
+	return *this;
+}
+
+LINKAGE_RESTRICTION void ImageBoxLayoutElement::getDeclarationDump(simple_json_builder & target) const
+{
+	RectLayoutElement::getDeclarationDump(target);
+	target.name(JsonFieldNames::Layout::LayoutData::IMAGE_BOX_OBJECT_());
+	{
+		simple_json_builder_object_scoped_guard guard = target.getObjectScopedGuard();
+		if (m_imageID.getValue().size() > 0) {
+			target.name(JsonFieldNames::Layout::LayoutData::ImageBoxObject::IMAGE_ID_()).pushStringValue(m_imageID.getValue());
+		}		
+	}
+}
+
 LINKAGE_RESTRICTION void LabelElement::getDeclarationDump(simple_json_builder & target) const
 {
 	RectLayoutElement::getDeclarationDump(target);

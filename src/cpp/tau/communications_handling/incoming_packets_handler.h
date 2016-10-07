@@ -32,7 +32,10 @@ public:
 	
 	virtual void onPacketReceived_LayoutPageSwitched(common::LayoutPageID const & newActiveLayoutPageID);
 	virtual void onPacketReceived_LayoutRefreshed(common::LayoutID const & layoutID);
+	virtual void onPacketReceived_ImageUpdated(common::ImageID const & imageID);
 
+	virtual void onPacketReceived_LayoutElementPosition(common::ElementID const & imageID, size_t x, size_t y, size_t width, size_t height);
+	
 	virtual void onPacketReceived_ServerRequestProcessingError(std::string const & layoutID, std::string const & additionalData);
 
 	// This method is called in situations there is an error which can't be resolved in terms of the

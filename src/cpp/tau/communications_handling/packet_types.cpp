@@ -34,6 +34,8 @@ namespace {
 		result[incoming_packets_types::LAYOUT_REFRESHED_()]                        = incoming_packets_types::LayoutRefreshed;
 		result[incoming_packets_types::LAYOUT_PAGE_SWITCHED_()]                    = incoming_packets_types::LayoutPageSwitched;
 		result[incoming_packets_types::SERVER_REQUEST_PROCESSING_ERRROR_()]        = incoming_packets_types::ServerRequestProcessingError;
+		result[incoming_packets_types::IMAGE_UPDATED_()]                           = incoming_packets_types::ImageUpdated;
+		result[incoming_packets_types::LAYOUT_ELEMENT_POSITION_INFO_()]            = incoming_packets_types::LayoutElementPositionInfo;
 		return result;
 	}
 }

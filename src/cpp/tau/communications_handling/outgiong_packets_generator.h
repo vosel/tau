@@ -6,6 +6,7 @@
 #pragma once
 
 #include "../common/element_id.h"
+#include "../common/image_resource.h"
 #include <string>
 namespace tau {
 namespace communications_handling {
@@ -22,7 +23,10 @@ public:
 	virtual void sendPacket_SetTextValue(common::ElementID const & layout_element_id, std::string const & newValue);
 	virtual void sendPacket_GetValue(common::ElementID const & layout_element_id);
 	virtual void sendPacket_SetEnabled(common::ElementID const & layout_element_id, bool isActivated);
+	virtual void sendPacket_PutImage(common::ImageID const & imageID, common::ImageResource const & image);
 
+	virtual void sendPacket_GetLayoutElementPositionInfo(common::ElementID const & layout_element_id);
+	
     // This method contains the code that actually sends the data to the socket (the way of sending it is defined by the user of the library)
 	virtual void sendData(std::string const & data) = 0;
 #if defined(TAU_CPP_03_COMPATIBILITY)

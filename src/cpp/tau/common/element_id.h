@@ -70,6 +70,13 @@ public:
 	explicit ElementID(std::string const & value): BasicWrapperForID(value) {};
 };
 
+class ImageID:
+	public BasicWrapperForID<ImageID>
+{
+public:
+	explicit ImageID(std::string const & value): BasicWrapperForID(value) {};
+};
+
 template <typename T>
 std::string const & getStringRef(BasicWrapperForID<T> const & idWrapper)
 {

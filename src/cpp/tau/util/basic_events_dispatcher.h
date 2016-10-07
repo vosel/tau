@@ -6,6 +6,7 @@
 #pragma once
 
 #include "../common/element_id.h"
+#include "../common/image_resource.h"
 #include "../communications_handling/abstract_events_dispatcher.h"
 #include "../layout_generation/my_shared_ptr.h"
 #include <string>
@@ -32,6 +33,8 @@ public:
 	virtual void packetReceived_layoutPageSwitched(common::LayoutPageID const & newActiveLayoutPageID) {};
 	virtual void packetReceived_layoutRefreshed(common::LayoutID const & layoutID) {};
 	virtual void packetReceived_requestProcessingError(std::string const & layoutID, std::string const & additionalData) {};
+	virtual void packetReceived_imageUpdated(common::ImageID const & imageID) {};
+	virtual void packetReceived_layoutElementPosition(common::ElementID const & elementID, size_t x, size_t y, size_t width, size_t height) {};
 	virtual void communicationErrorOccured(std::string const & errorDescription) {};
 	virtual void unknownErrorOccured(std::string const & errorMessage) {};
 
@@ -46,6 +49,9 @@ public:
 	virtual void sendPacket_changeElementNote(common::ElementID const & elementID, std::string const & note);
 	virtual void sendPacket_changeShownLayoutPage(common::LayoutPageID const & layoutPageIdToSwitchTo);
 	virtual void sendPacket_changeElementEnabledState(common::ElementID const & elementID, bool newState);
+	
+	virtual void sendPacket_getLayoutElementPositionInfo(common::ElementID const & elementID);
+	virtual void sendPacket_putImage(common::ImageID const & imageID, common::ImageResource const & image);
 
 	virtual tau::communications_handling::IncomingPacketsHandler * getIncomingPacketsHandler();
 	virtual tau::communications_handling::CommunicationIssuesHandler * getCommunicationIssuesHandler();

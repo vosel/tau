@@ -110,6 +110,17 @@ public:
 	virtual void getDeclarationDump(simple_json_builder & target) const;
 };
 
+class ImageBoxLayoutElement :
+	public RectLayoutElement<ImageBoxLayoutElement>
+{
+	common::ImageID m_imageID;
+public:
+	ImageBoxLayoutElement():m_imageID("") {};
+	ImageBoxLayoutElement(common::ImageID const & id):m_imageID(id) {};
+	ImageBoxLayoutElement & imageID(common::ImageID const & id);
+	virtual void getDeclarationDump(simple_json_builder & target) const;
+};
+
 class LabelElement:
 	public RectLayoutElement<LabelElement>
 {

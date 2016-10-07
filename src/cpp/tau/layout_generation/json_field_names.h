@@ -29,6 +29,8 @@ struct JsonFieldNames
 			static const char * CONTAINER_OBJECT_() { static const char * result = "ContainerObject"; return result; }
 			static const char * TEXT_BOX_OBJECT_()	{ static const char * result = "TextBoxObject";	return result; }
 			static const char * CLIENT_INPUT_OBJECT_(){ static const char * result = "ClientInputObject"; return result; }
+			static const char * IMAGE_BOX_OBJECT_() { static const char * result = "ImageBoxObject"; return result; }
+
 			struct ButtonObject{
 				static const char * IS_ENABLED_()                   { static const char * result = IS_ENABLED_FLAG_ALIAS_();	return result; }
 				static const char * TEXT_()							{ static const char * result = TEXT_VARIABLE_ALIAS_();	return result; }
@@ -84,6 +86,9 @@ struct JsonFieldNames
 				static const char * BOOL_INPUT_OBJECT_()	{ static const char * result = "booleanInputObject"; return result; }
 				
 				static const char * NOTIFY_SERVER_ABOUT_MODIFICATIONS_()	{ static const char * result = "notifyServerAboutModifications"; return result; }
+			};
+			struct ImageBoxObject{
+				static const char * IMAGE_ID_() { static const char * result = "displayedImage"; return result; }
 			};
 		};
 	};
