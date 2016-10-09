@@ -6,6 +6,7 @@
 
 #pragma once
 #include "image_resource.h"
+#include <ostream>
 #include <vector>
 
 namespace tau {

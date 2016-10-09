@@ -22,8 +22,8 @@ namespace common {
     {}
     LINKAGE_RESTRICTION ARGB_point::ARGB_point(unsigned int argb)
     {
-		this->operator =(argb);
-	}
+        this->operator =(argb);
+    }
 
     LINKAGE_RESTRICTION void ARGB_point::serialize(std::ostream & target) const
     {
@@ -46,7 +46,7 @@ namespace common {
         b = other.b;
     }
 
-	LINKAGE_RESTRICTION void ARGB_point::operator = (unsigned int argb)
+    LINKAGE_RESTRICTION void ARGB_point::operator = (unsigned int argb)
     {
         a = (0xff000000 & argb) >> 24;
         r = (0xff0000 & argb) >> 16;
@@ -57,24 +57,26 @@ namespace common {
     LINKAGE_RESTRICTION ARGB_ImageResource::ARGB_ImageResource(size_t width, size_t height)
         : m_width(width), m_height(height)
     {
+        m_bitmap.reserve(m_width);
         for (size_t i = 0; i < m_width; ++i) {
             m_bitmap.push_back(std::vector<ARGB_point>());
+            m_bitmap.back().reserve(m_height);
             for (size_t j = 0; j < m_height; ++j) {
                 m_bitmap.back().push_back(ARGB_point());
             }
         }
     }
-   
-	LINKAGE_RESTRICTION ARGB_point & ARGB_ImageResource::at(size_t x, size_t y)
+
+    LINKAGE_RESTRICTION ARGB_point & ARGB_ImageResource::at(size_t x, size_t y)
     {
-    	return m_bitmap[x][y];
+        return m_bitmap[x][y];
     }
-	
-	LINKAGE_RESTRICTION ARGB_ImageResource::RowOfPoints & ARGB_ImageResource::operator[](size_t x)
-	{
-		return m_bitmap[x];
-	}
-	
+    
+    LINKAGE_RESTRICTION ARGB_ImageResource::RowOfPoints & ARGB_ImageResource::operator[](size_t x)
+    {
+        return m_bitmap[x];
+    }
+    
     LINKAGE_RESTRICTION void ARGB_ImageResource::serialize(std::ostream & target) const
     {
         target << "ARGB\n" << m_width << "x" << m_height << "\n";
