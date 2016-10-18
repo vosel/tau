@@ -7,6 +7,7 @@
 
 #include "../common/element_id.h"
 #include "../common/image_resource.h"
+#include "../common/sensor_data.h"
 #include "../communications_handling/abstract_events_dispatcher.h"
 #include "../layout_generation/my_shared_ptr.h"
 #include <string>
@@ -35,6 +36,7 @@ public:
 	virtual void packetReceived_requestProcessingError(std::string const & layoutID, std::string const & additionalData) {};
 	virtual void packetReceived_imageUpdated(common::ImageID const & imageID) {};
 	virtual void packetReceived_layoutElementPosition(common::ElementID const & elementID, size_t x, size_t y, size_t width, size_t height) {};
+	virtual void packetReceived_sensorsDataUpdate(common::SensorData const & data) {};
 	virtual void communicationErrorOccured(std::string const & errorDescription) {};
 	virtual void unknownErrorOccured(std::string const & errorMessage) {};
 
@@ -52,7 +54,9 @@ public:
 	
 	virtual void sendPacket_getLayoutElementPositionInfo(common::ElementID const & elementID);
 	virtual void sendPacket_putImage(common::ImageID const & imageID, common::ImageResource const & image);
-
+	virtual void sendPacket_subscribeToSensor(size_t sensorIndex, size_t interval);
+	virtual void sendPacket_unsubscribeFromSensor(size_t sensorIndex);
+	
 	virtual tau::communications_handling::IncomingPacketsHandler * getIncomingPacketsHandler();
 	virtual tau::communications_handling::CommunicationIssuesHandler * getCommunicationIssuesHandler();
 	

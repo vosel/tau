@@ -8,8 +8,10 @@
 #endif
 
 #include "packet_types.h"
+#include <stdlib.h> //atof
 #include <sstream>
 #include <iostream>
+#include <vector>
 
 #ifdef TAU_HEADERONLY
 #define LINKAGE_RESTRICTION inline
@@ -54,7 +56,16 @@ LINKAGE_RESTRICTION void IncomingPacketsHandler::onPacketReceived(
 				stream >> width >> height;
 				stream >> deviceID;
 				stream >> clientVersion;
-				ClientDeviceInfo info(width, height, deviceID, clientVersion);
+				
+				std::vector<std::string> sensorsNames;
+				std::string currentLine;
+				std::string const sensorPrefix("sensor:");
+				while (std::getline(stream, currentLine)) {
+					if (currentLine.find(sensorPrefix) == 0) {
+						sensorsNames.push_back(currentLine.substr(sensorPrefix.size(), currentLine.size()));
+					}
+				}
+				ClientDeviceInfo info(width, height, deviceID, clientVersion, sensorsNames);
 				onPacketReceived_ClientDeviceInfo(info);
 			}
 			break;
@@ -101,6 +112,27 @@ LINKAGE_RESTRICTION void IncomingPacketsHandler::onPacketReceived(
 				onPacketReceived_LayoutElementPosition(common::ElementID(layoutElementID), x, y, width, height);
 			}
 			break;
+		case incoming_packets_types::SensorsDataUpdate: {
+				common::SensorData data;
+				std::stringstream stream(additionalData);
+				
+				std::string sensorIndexStr;
+				if (std::getline(stream, sensorIndexStr)) {
+					data.sensorIndex = atoi(sensorIndexStr.c_str());
+				}
+				std::string timestampStr;
+				if (std::getline(stream, timestampStr)) {
+					data.timestamp = timestampStr;
+				}
+				std::string measurementData;
+				while (std::getline(stream, measurementData)) {
+					double measurement = atof(measurementData.c_str());
+					data.sensorData.push_back(measurement);
+				}
+				onPacketReceived_SensorsDataUpdate(data);
+			}
+			break;
+			
 		default: 
 			std::stringstream error;
 			error << "Unknown type of packet is received: " << packetType;
@@ -162,6 +194,9 @@ LINKAGE_RESTRICTION void IncomingPacketsHandler::onPacketReceived_LayoutElementP
 {}
 
 LINKAGE_RESTRICTION void IncomingPacketsHandler::onPacketReceived_ServerRequestProcessingError(std::string const & layoutID, std::string const & additionalData)
+{}
+
+LINKAGE_RESTRICTION void IncomingPacketsHandler::onPacketReceived_SensorsDataUpdate(common::SensorData const & data)
 {}
 
 }

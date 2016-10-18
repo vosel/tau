@@ -29,6 +29,8 @@ public:
 	virtual void sendPacket_SetImageForElement(common::ElementID const & elementToUpdate, common::ImageID const & imageID);
 
 	virtual void sendPacket_GetLayoutElementPositionInfo(common::ElementID const & layout_element_id);
+	virtual void sendPacket_SubscribeToSensor(size_t sensorIndex, size_t interval);
+	virtual void sendPacket_UnsubscribeFromSensor(size_t sensorIndex);
 	
     // This method contains the code that actually sends the data to the socket (the way of sending it is defined by the user of the library)
 	virtual void sendData(std::string const & data) = 0;

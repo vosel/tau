@@ -25,6 +25,7 @@ namespace communications_handling {
 			LayoutPageSwitched,
 			ImageUpdated,
 			LayoutElementPositionInfo,
+			SensorsDataUpdate,
 			UnknownPacketType
 		};
 		//This packet is sent when a button is clicked on client.
@@ -64,6 +65,8 @@ namespace communications_handling {
 		
 		static const char * IMAGE_UPDATED_()                    { static const char * result = "ImageUpdated";		return result; }
 		static const char * LAYOUT_ELEMENT_POSITION_INFO_()     { static const char * result = "LayoutElementPositionInfo";		return result; }
+		
+		static const char * SENSORS_DATA_UPDATE_()     { static const char * result = "SensorsDataUpdate";		return result; }
 
 		static TypeID getTypeID(std::string const & packet_type_string);
 	};
@@ -80,7 +83,10 @@ namespace communications_handling {
 		static const char * SET_VALUE_FOR_TEXT_INPUT_()			{ static const char * result = "SetTextValue";		return result; }
 		static const char * SET_ENABLED_FLAG_()					{ static const char * result = "SetEnabled";		return result; }
 		static const char * PUT_IMAGE_()						{ static const char * result = "PutImage";	return result; }
+		static const char * SET_IMAGE_FOR_ELEM_()				{ static const char * result = "SetImageRefForElem";	return result; }
 		static const char * GET_LAYOUT_ELEM_POSITION_()		    { static const char * result = "GetLayoutElemPosition";	return result; }
+		static const char * SUBSCRIBE_TO_SENSOR_()		        { static const char * result = "SubscribeToSensor";	return result; }
+		static const char * UNSUBSCRIBE_FROM_SENSOR_()		    { static const char * result = "UnsubscribeFromSensor";	return result; }
 	};
 }
 }

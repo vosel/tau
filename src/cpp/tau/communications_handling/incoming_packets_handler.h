@@ -7,6 +7,7 @@
 
 #include "client_info.h"
 #include "../common/element_id.h"
+#include "../common/sensor_data.h"
 #include <string>
 namespace tau {
 namespace communications_handling {
@@ -35,6 +36,7 @@ public:
 	virtual void onPacketReceived_ImageUpdated(common::ImageID const & imageID);
 
 	virtual void onPacketReceived_LayoutElementPosition(common::ElementID const & imageID, size_t x, size_t y, size_t width, size_t height);
+	virtual void onPacketReceived_SensorsDataUpdate(common::SensorData const & data);
 	
 	virtual void onPacketReceived_ServerRequestProcessingError(std::string const & layoutID, std::string const & additionalData);
 

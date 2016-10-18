@@ -78,6 +78,9 @@ namespace {
 		void onPacketReceived_ServerRequestProcessingError(std::string const & layoutID, std::string const & additionalData) OVERRIDE_IDENTIFIER {
 			m_owner->packetReceived_requestProcessingError(layoutID, additionalData);
 		}
+		void onPacketReceived_SensorsDataUpdate(common::SensorData const & data) OVERRIDE_IDENTIFIER {
+			m_owner->packetReceived_sensorsDataUpdate(data);
+		}
 		void unknownErrorOccured(std::string const & errorMessage) OVERRIDE_IDENTIFIER {
 			m_owner->unknownErrorOccured(errorMessage);
 		}
@@ -164,6 +167,16 @@ LINKAGE_RESTRICTION void BasicEventsDispatcher::sendPacket_getLayoutElementPosit
 LINKAGE_RESTRICTION void BasicEventsDispatcher::sendPacket_putImage(common::ImageID const & imageID, common::ImageResource const & image)
 {
 	m_outgiongPacketsGenerator.sendPacket_PutImage(imageID, image);
+}
+
+LINKAGE_RESTRICTION void BasicEventsDispatcher::sendPacket_subscribeToSensor(size_t sensorIndex, size_t interval)
+{
+	m_outgiongPacketsGenerator.sendPacket_SubscribeToSensor(sensorIndex, interval);
+}
+
+LINKAGE_RESTRICTION void BasicEventsDispatcher::sendPacket_unsubscribeFromSensor(size_t sensorIndex)
+{
+	m_outgiongPacketsGenerator.sendPacket_UnsubscribeFromSensor(sensorIndex);
 }
 
 } //namespace util

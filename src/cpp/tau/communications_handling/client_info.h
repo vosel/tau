@@ -6,6 +6,7 @@
 #pragma once
 
 #include <string>
+#include <vector>
 
 namespace tau {
 namespace communications_handling {
@@ -16,8 +17,9 @@ struct ClientDeviceInfo
 	size_t const height;
 	size_t const version;
 	std::string const deviceID;
-	ClientDeviceInfo(size_t screenWidth, size_t screenHeight, std::string const & clientDeviceID, size_t clientVersion):
-		width(screenWidth), height(screenHeight), version(clientVersion), deviceID(clientDeviceID) {};
+	std::vector<std::string> const sensors;
+	ClientDeviceInfo(size_t screenWidth, size_t screenHeight, std::string const & clientDeviceID, size_t clientVersion, std::vector<std::string> const & clientSensors):
+		width(screenWidth), height(screenHeight), version(clientVersion), deviceID(clientDeviceID), sensors(clientSensors) {};
 };
 
 struct ClientConnectionInfo
@@ -29,7 +31,7 @@ struct ClientConnectionInfo
 	ClientConnectionInfo(std::string const & connection_remoteAddr, unsigned short connection_remotePort, std::string const & connection_localAddr, unsigned short connection_localPort):
 		remoteAddr(connection_remoteAddr), remotePort(connection_remotePort), localAddr(connection_localAddr), localPort(connection_localPort)
 	{};
-	std::string getRemoteAddrDump() const;
+	std::string getRemoteAddrDump() const;	
 	std::string getLocalAddrDump() const;
 };
 

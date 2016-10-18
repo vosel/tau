@@ -131,6 +131,26 @@ namespace {
 			layout_element_id, "");
 		sendData(toSend);
 	}
+	
+	LINKAGE_RESTRICTION void OutgiongPacketsGenerator::sendPacket_SubscribeToSensor(size_t sensorIndex, size_t interval)
+	{
+		std::stringstream data;
+		data << sensorIndex << "\n" << interval;
+		std::string toSend = generatePacketData(
+			tau::communications_handling::outgoing_packets_types::SUBSCRIBE_TO_SENSOR_(),
+			common::UnassignedID(), data.str());
+		sendData(toSend);
+	}
+	
+	LINKAGE_RESTRICTION void OutgiongPacketsGenerator::sendPacket_UnsubscribeFromSensor(size_t sensorIndex)
+	{
+		std::stringstream data;
+		data << sensorIndex;		
+		std::string toSend = generatePacketData(
+			tau::communications_handling::outgoing_packets_types::UNSUBSCRIBE_FROM_SENSOR_(),
+			common::UnassignedID(), data.str());
+		sendData(toSend);
+	}
 }
 }
 #undef LINKAGE_RESTRICTION
