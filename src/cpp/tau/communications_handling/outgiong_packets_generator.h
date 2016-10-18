@@ -25,6 +25,9 @@ public:
 	virtual void sendPacket_SetEnabled(common::ElementID const & layout_element_id, bool isActivated);
 	virtual void sendPacket_PutImage(common::ImageID const & imageID, common::ImageResource const & image);
 
+	// Sets a new image ID for one of the elements. This element will use this id to reference the image to be displayed.
+	virtual void sendPacket_SetImageForElement(common::ElementID const & elementToUpdate, common::ImageID const & imageID);
+
 	virtual void sendPacket_GetLayoutElementPositionInfo(common::ElementID const & layout_element_id);
 	
     // This method contains the code that actually sends the data to the socket (the way of sending it is defined by the user of the library)

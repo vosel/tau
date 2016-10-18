@@ -116,6 +116,14 @@ namespace {
 		sendData(toSend);
 	}
 
+	LINKAGE_RESTRICTION void OutgiongPacketsGenerator::sendPacket_SetImageForElement(common::ElementID const & elementToUpdate, common::ImageID const & imageID)
+	{
+		std::string toSend = generatePacketData(
+			tau::communications_handling::outgoing_packets_types::SET_IMAGE_FOR_ELEM_(),
+			elementToUpdate, imageID.getValue());
+		sendData(toSend);
+	}
+
 	LINKAGE_RESTRICTION void OutgiongPacketsGenerator::sendPacket_GetLayoutElementPositionInfo(common::ElementID const & layout_element_id)
 	{
 		std::string toSend = generatePacketData(
