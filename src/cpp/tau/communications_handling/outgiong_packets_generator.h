@@ -34,6 +34,8 @@ public:
 	
     // This method contains the code that actually sends the data to the socket (the way of sending it is defined by the user of the library)
 	virtual void sendData(std::string const & data) = 0;
+	
+	virtual void close_connection() = 0;
 #if defined(TAU_CPP_03_COMPATIBILITY)
 	virtual ~OutgiongPacketsGenerator() {};
 #else

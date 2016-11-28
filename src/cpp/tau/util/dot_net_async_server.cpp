@@ -93,7 +93,9 @@ LINKAGE_RESTRICTION void DotNetAsyncServer::remove_closed_handler(DotNetAsyncSes
 	begin_accept_if_allowed_to();
 }
 
-LINKAGE_RESTRICTION DotNetAsyncOutgiongPacketsGenerator::DotNetAsyncOutgiongPacketsGenerator(void (*callbackIntoDotNet)()):m_sendCallback(callbackIntoDotNet)
+LINKAGE_RESTRICTION DotNetAsyncOutgiongPacketsGenerator::DotNetAsyncOutgiongPacketsGenerator(
+	void (*sendDataCallbackIntoDotNet)(), void (*closeConnectionCallbackIntoDotNet)())
+	: m_sendCallback(sendDataCallbackIntoDotNet), m_closeConnectionCallback(closeConnectionCallbackIntoDotNet)
 {}
 
 LINKAGE_RESTRICTION void DotNetAsyncOutgiongPacketsGenerator::sendData(std::string const & toSend)
@@ -102,11 +104,16 @@ LINKAGE_RESTRICTION void DotNetAsyncOutgiongPacketsGenerator::sendData(std::stri
 	m_sendCallback();
 	m_current_pending_buf = "";
 }
+
+LINKAGE_RESTRICTION void DotNetAsyncOutgiongPacketsGenerator::close_connection()
+{
+	m_closeConnectionCallback();
+}
+
 LINKAGE_RESTRICTION std::string DotNetAsyncOutgiongPacketsGenerator::getBufferToSend()
 {
 	return m_current_pending_buf;
 }
-
 
 namespace {
 
@@ -123,9 +130,12 @@ LINKAGE_RESTRICTION DotNetAsyncServer::DotNetAsyncSession::DotNetAsyncSession(Do
 {
 	//creating the delegate and extracting function ptr for the callback (it would be called from the native code side to inform .net code that there is some data that need to be sent to the socket)
 	m_sendDataDelegate = gcnew MyNativeCallbacksDelegate(this, &DotNetAsyncServer::DotNetAsyncSession::send_data_pending_in_native_code);
-	System::IntPtr callbackForNativeCode = System::Runtime::InteropServices::Marshal::GetFunctionPointerForDelegate(m_sendDataDelegate);
+	System::IntPtr sendDataCallbackForNativeCode = System::Runtime::InteropServices::Marshal::GetFunctionPointerForDelegate(m_sendDataDelegate);
+	m_closeConnectionDelegate = gcnew MyNativeCallbacksDelegate(this, &DotNetAsyncServer::DotNetAsyncSession::close);
+	System::IntPtr closeConnectionCallbackForNativeCode = System::Runtime::InteropServices::Marshal::GetFunctionPointerForDelegate(m_closeConnectionDelegate);
 	m_packetsGeneratorPtr = new DotNetAsyncOutgiongPacketsGenerator(
-		(void (*)())(callbackForNativeCode.ToPointer()));
+		(void (*)())(sendDataCallbackForNativeCode.ToPointer()),
+		(void (*)())(closeConnectionCallbackForNativeCode.ToPointer()));
 
 	m_incomingDataParser =
 		new tau::communications_handling::IncomingDataStreamParser();

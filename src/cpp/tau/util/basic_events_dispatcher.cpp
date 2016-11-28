@@ -179,6 +179,11 @@ LINKAGE_RESTRICTION void BasicEventsDispatcher::sendPacket_unsubscribeFromSensor
 	m_outgiongPacketsGenerator.sendPacket_UnsubscribeFromSensor(sensorIndex);
 }
 
+LINKAGE_RESTRICTION void BasicEventsDispatcher::closeConnection()
+{
+	m_outgiongPacketsGenerator.close_connection();
+}
+
 } //namespace util
 } //namespace tau
 

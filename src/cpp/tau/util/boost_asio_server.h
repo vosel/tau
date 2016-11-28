@@ -42,6 +42,7 @@ class BoostAsioOutgiongPacketsGenerator :
 public:
 	void setParentSession(AbstractBoostAsioSession * session);
 	virtual void sendData(std::string const & toSend) OVERRIDE_IDENTIFIER;
+	virtual void close_connection() OVERRIDE_IDENTIFIER;
 };
 
 class AbstractBoostAsioSession

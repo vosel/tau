@@ -60,6 +60,7 @@ public:
 	virtual tau::communications_handling::IncomingPacketsHandler * getIncomingPacketsHandler();
 	virtual tau::communications_handling::CommunicationIssuesHandler * getCommunicationIssuesHandler();
 	
+	void closeConnection();
 #if defined(TAU_CPP_03_COMPATIBILITY)
 	virtual ~BasicEventsDispatcher() {};
 #else

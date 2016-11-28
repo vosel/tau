@@ -15,10 +15,13 @@ class DotNetAsyncOutgiongPacketsGenerator :
 	public tau::communications_handling::OutgiongPacketsGenerator
 {
 	void (*m_sendCallback)(); // Callback into .NET world to send the data in buffer.
+	void (*m_closeConnectionCallback)(); // Callback into .NET world to close the socket.
+
 	std::string m_current_pending_buf;
 public:
-	DotNetAsyncOutgiongPacketsGenerator(void (*callbackIntoDotNet)());
+	DotNetAsyncOutgiongPacketsGenerator(void (*sendDataCallbackIntoDotNet)(), void (*closeConnectionCallbackIntoDotNet)());
 	virtual void sendData(std::string const & toSend);
+	virtual void close_connection();
 	std::string getBufferToSend();
 };
 
@@ -51,6 +54,7 @@ protected:
 		//These fields are used for preparing and sending data to the socket:
 		delegate void MyNativeCallbacksDelegate();
 		MyNativeCallbacksDelegate ^ m_sendDataDelegate;
+		MyNativeCallbacksDelegate ^ m_closeConnectionDelegate;
 		array<unsigned char> ^ m_buffer;
 		void beginReceive();
 	protected:

@@ -30,6 +30,11 @@ LINKAGE_RESTRICTION void BoostAsioOutgiongPacketsGenerator::sendData(std::string
 	m_session->sendStringToSocket(toSend);
 };
 
+LINKAGE_RESTRICTION void BoostAsioOutgiongPacketsGenerator::close_connection()
+{
+	m_session->socket().close();
+}
+
 namespace {
 	std::string getAddr(boost::asio::ip::tcp::endpoint const & ep)
 	{
