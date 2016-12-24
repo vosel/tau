@@ -40,7 +40,7 @@ LINKAGE_RESTRICTION LayoutPage & LayoutPage::height(int height)
 	return *this;
 }
 
-LINKAGE_RESTRICTION LayoutInfo::LayoutInfo():m_height(-1), m_startLayoutPageID(""), m_wholeLayoutID("")
+LINKAGE_RESTRICTION LayoutInfo::LayoutInfo():m_startLayoutPageID(""), m_height(-1), m_wholeLayoutID("")
 {}
 
 LINKAGE_RESTRICTION LayoutInfo & LayoutInfo::setTitle(std::string const & title)

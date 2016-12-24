@@ -96,8 +96,8 @@ public:
 
 	template <typename T, typename U>
 	UnevenlySplitElementsPair(const T & first, const U & second, bool elementsAboveAndBelowEachOther, double ratio)
-		:LayoutElementsContainer(elementsAboveAndBelowEachOther), m_ratio(ratio)
-		, m_first(my_shared_ptr<T>::createInstance(first)), m_second(my_shared_ptr<U>::createInstance(second))
+		:LayoutElementsContainer(elementsAboveAndBelowEachOther)
+		, m_first(my_shared_ptr<T>::createInstance(first)), m_second(my_shared_ptr<U>::createInstance(second)), m_ratio(ratio)
 	{};
 	virtual void getDeclarationDump(simple_json_builder & target) const;
 };

@@ -128,7 +128,7 @@ LINKAGE_RESTRICTION void AbstractBoostAsioSession::handle_write(const boost::sys
 }
 
 LINKAGE_RESTRICTION AbstractBoostAsioServer::AbstractBoostAsioServer(boost::asio::io_service& io_service, short port):
-	  m_io_service(io_service), m_acceptor(io_service, boost::asio::ip::tcp::endpoint(boost::asio::ip::tcp::v4(), port))
+	  m_acceptor(io_service, boost::asio::ip::tcp::endpoint(boost::asio::ip::tcp::v4(), port)), m_io_service(io_service)
 {}
 
 LINKAGE_RESTRICTION void AbstractBoostAsioServer::start()

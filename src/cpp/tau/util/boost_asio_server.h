@@ -56,6 +56,7 @@ protected:
 public:
 	AbstractBoostAsioSession(boost::asio::io_service& io_service);
 	boost::asio::ip::tcp::socket& socket();
+	virtual ~AbstractBoostAsioSession() {};
 
 public:
 	void sendStringToSocket(std::string const & str);

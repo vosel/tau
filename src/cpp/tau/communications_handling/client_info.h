@@ -29,7 +29,7 @@ struct ClientConnectionInfo
 	std::string const remoteAddr;
 	unsigned short const remotePort;
 	ClientConnectionInfo(std::string const & connection_remoteAddr, unsigned short connection_remotePort, std::string const & connection_localAddr, unsigned short connection_localPort):
-		remoteAddr(connection_remoteAddr), remotePort(connection_remotePort), localAddr(connection_localAddr), localPort(connection_localPort)
+		localAddr(connection_localAddr), localPort(connection_localPort), remoteAddr(connection_remoteAddr), remotePort(connection_remotePort)
 	{};
 	std::string getRemoteAddrDump() const;	
 	std::string getLocalAddrDump() const;
