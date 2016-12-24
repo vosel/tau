@@ -120,6 +120,9 @@ public:
     virtual void sendData(std::string const & data) {
         write(m_socketHandle, data.c_str(), data.size());
     }
+    virtual void close_connection() {
+        close(m_socketHandle);
+    }
 };
 std::string getAddrString(sockaddr_in const & toConvert) {
 	int buflen = INET_ADDRSTRLEN;
