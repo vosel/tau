@@ -45,8 +45,8 @@ There are classes dedicated for these tasks in the `tau::communications_handling
 #### AbstractEventsDispatcher class
 
 All the user code that works directly with the client should be put in a class that is inherited from `tau::communications_handling::AbstractEventsDispatcher` class.
-The `AbstractEventsDispatcher` class provides access to 3 objects, which handle the data flow from the user's point of view:
-- `IncomingPacketsHandler`
+The `AbstractEventsDispatcher` class provides access to 3 objects, which handle the data flow from the user's point of view. The types of these objects are:
+- `tau::communications_handling::IncomingPacketsHandler`
 - `tau::communications_handling::CommunicationIssuesHandler`
 - `tau::communications_handling::OutgiongPacketsGenerator`
 
