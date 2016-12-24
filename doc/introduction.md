@@ -80,7 +80,7 @@ Our program is ready. Let's build it. To build this example we will need to prov
 
 This is how to do it with the `gcc` compiler:
 ```sh
-g++ -lboost_system -pthread -lboost_thread -D TAU_HEADERONLY -D TAU_CPP_03_COMPATIBILITY -I $LIBRARY_LOCATION main.cpp -o demo
+g++ -std=c++03 -D TAU_HEADERONLY -D TAU_CPP_03_COMPATIBILITY -lboost_system -pthread -lboost_thread -I $LIBRARY_LOCATION main.cpp -o demo_gcc_cpp03_boost
 ```
 So, the notable compiler options are:
  - `-lboost_system -pthread -lboost_thread` - libraries needed by the `boost::asio` library
@@ -364,6 +364,9 @@ public:
     virtual void sendData(std::string const & data) {
         write(m_socketHandle, data.c_str(), data.size());
     }
+    virtual void close_connection() {
+        close(m_socketHandle);
+    }
 };
 ```
 
@@ -390,7 +393,7 @@ The 3 objects are handling the server logic. `MyEventsDispatcher` - a class that
 
 Here is how to compile this code: 
 ```sh
-g++ -D TAU_HEADERONLY -D TAU_CPP_03_COMPATIBILITY -I $LIBRARY_LOCATION main.cpp -o demo
+g++ -std=c++03 -D TAU_HEADERONLY -D TAU_CPP_03_COMPATIBILITY -I $LIBRARY_LOCATION main.cpp -o demo_gcc_cpp03_posix
 ```
 Note the lack of compiler options for `boost::asio` library (`-lboost_system -pthread -lboost_thread`).
 
