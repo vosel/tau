@@ -11,9 +11,9 @@ This namespace contains the classes that are used to handle the information sent
 [tau::communications_handling reference](communications_management.md)
 ##tau::layout_generation
 This namespace contains classes used for generation of the json objects for layout presentation. These json objects are sent to the client, which uses them to draw the UI for the user.
-
+[tau::layout_generation reference](layouts.md)
 ##tau::util
 The util namespace contains all the helper classes that can be useful, but not essential for the library user. There are classes that implement socket communication logic for different platforms (currently Boost::asio and C++/CLI implementations are available), also it has some classes built on top of the tau::communications_handling classes to facilitate the library usage (getting rid of some of the boilerplate code).
-
+[tau::util reference](util.md)
 ##tau::common
 This namespace contains classes, which are used across the whole library. The purpose of this namespace is to remove dependencies between `communications_handling` and `layout_generation`.
