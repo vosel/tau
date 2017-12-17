@@ -22,10 +22,10 @@ public:
         {};
 
     virtual void packetReceived_requestProcessingError(
-		std::string const & layoutID, std::string const & additionalData)
+		std::string const & relatedID, std::string const & additionalData)
     {
-        std::cout << "Error received from client:\nLayouID: "
-			<< layoutID << "\nError: " << additionalData << "\n";
+        std::cout << "Error received from client:\nRelated elementID/layoutID: "
+			<< relatedID << "\nError: " << additionalData << "\n";
     }
 
     virtual void onClientConnected(
