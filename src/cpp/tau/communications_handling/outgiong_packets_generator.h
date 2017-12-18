@@ -32,6 +32,8 @@ public:
 	virtual void sendPacket_SubscribeToSensor(size_t sensorIndex, size_t interval);
 	virtual void sendPacket_UnsubscribeFromSensor(size_t sensorIndex);
 	
+	virtual void sendPacket_Heartbeat();
+	
     // This method contains the code that actually sends the data to the socket (the way of sending it is defined by the user of the library)
 	virtual void sendData(std::string const & data) = 0;
 	

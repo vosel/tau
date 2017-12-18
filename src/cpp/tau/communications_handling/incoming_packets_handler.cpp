@@ -132,7 +132,9 @@ LINKAGE_RESTRICTION void IncomingPacketsHandler::onPacketReceived(
 				onPacketReceived_SensorsDataUpdate(data);
 			}
 			break;
-			
+		case incoming_packets_types::HeartbeatResponse: 
+			onPacketReceived_HeartbeatResponse();
+			break;
 		default: 
 			std::stringstream error;
 			error << "Unknown type of packet is received: " << packetType;
@@ -191,6 +193,9 @@ LINKAGE_RESTRICTION void IncomingPacketsHandler::onPacketReceived_ImageUpdated(c
 {}
 
 LINKAGE_RESTRICTION void IncomingPacketsHandler::onPacketReceived_LayoutElementPosition(common::ElementID const & imageID, size_t x, size_t y, size_t width, size_t height)
+{}
+
+LINKAGE_RESTRICTION void IncomingPacketsHandler::onPacketReceived_HeartbeatResponse()
 {}
 
 LINKAGE_RESTRICTION void IncomingPacketsHandler::onPacketReceived_ServerRequestProcessingError(std::string const & layoutID, std::string const & additionalData)

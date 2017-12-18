@@ -57,6 +57,9 @@ public:
 	virtual void sendPacket_subscribeToSensor(size_t sensorIndex, size_t interval);
 	virtual void sendPacket_unsubscribeFromSensor(size_t sensorIndex);
 	
+	virtual void sendPacket_heartbeat();
+	virtual void packetReceived_heartbeatResponse() {};
+	
 	virtual tau::communications_handling::IncomingPacketsHandler * getIncomingPacketsHandler();
 	virtual tau::communications_handling::CommunicationIssuesHandler * getCommunicationIssuesHandler();
 	

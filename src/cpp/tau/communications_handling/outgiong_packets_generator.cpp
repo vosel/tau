@@ -151,6 +151,14 @@ namespace {
 			common::UnassignedID(), data.str());
 		sendData(toSend);
 	}
+
+	LINKAGE_RESTRICTION void OutgiongPacketsGenerator::sendPacket_Heartbeat()
+	{
+		std::string toSend = generatePacketData(
+			tau::communications_handling::outgoing_packets_types::HEARTBEAT_(),
+			common::UnassignedID(), "");
+		sendData(toSend);
+	}
 }
 }
 #undef LINKAGE_RESTRICTION

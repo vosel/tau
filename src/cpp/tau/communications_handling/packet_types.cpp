@@ -37,6 +37,7 @@ namespace {
 		result[incoming_packets_types::IMAGE_UPDATED_()]                           = incoming_packets_types::ImageUpdated;
 		result[incoming_packets_types::LAYOUT_ELEMENT_POSITION_INFO_()]            = incoming_packets_types::LayoutElementPositionInfo;
 		result[incoming_packets_types::SENSORS_DATA_UPDATE_()]                     = incoming_packets_types::SensorsDataUpdate;
+		result[incoming_packets_types::HEARTBEAT_RESPONSE_()]                      = incoming_packets_types::HeartbeatResponse;
 		return result;
 	}
 }

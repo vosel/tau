@@ -26,6 +26,7 @@ namespace communications_handling {
 			ImageUpdated,
 			LayoutElementPositionInfo,
 			SensorsDataUpdate,
+			HeartbeatResponse,
 			UnknownPacketType
 		};
 		//This packet is sent when a button is clicked on client.
@@ -67,7 +68,10 @@ namespace communications_handling {
 		static const char * LAYOUT_ELEMENT_POSITION_INFO_()     { static const char * result = "LayoutElementPositionInfo";		return result; }
 		
 		static const char * SENSORS_DATA_UPDATE_()     { static const char * result = "SensorsDataUpdate";		return result; }
-
+		
+		//This packet should be sent by the client when it receives the heartbeat packed from server. If it is not sent, there is probably a connection problem.
+		static const char * HEARTBEAT_RESPONSE_()		   { static const char * result = "HeartbeatResponse";	return result; }
+		
 		static TypeID getTypeID(std::string const & packet_type_string);
 	};
 
@@ -87,6 +91,7 @@ namespace communications_handling {
 		static const char * GET_LAYOUT_ELEM_POSITION_()		    { static const char * result = "GetLayoutElemPosition";	return result; }
 		static const char * SUBSCRIBE_TO_SENSOR_()		        { static const char * result = "SubscribeToSensor";	return result; }
 		static const char * UNSUBSCRIBE_FROM_SENSOR_()		    { static const char * result = "UnsubscribeFromSensor";	return result; }
+		static const char * HEARTBEAT_()		   	   	   	      { static const char * result = "Heartbeat";	return result; }
 	};
 }
 }
