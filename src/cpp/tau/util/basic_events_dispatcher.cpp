@@ -81,6 +81,9 @@ namespace {
 		void onPacketReceived_SensorsDataUpdate(common::SensorData const & data) OVERRIDE_IDENTIFIER {
 			m_owner->packetReceived_sensorsDataUpdate(data);
 		}
+		void onPacketReceived_HeartbeatResponse() OVERRIDE_IDENTIFIER {
+			m_owner->packetReceived_heartbeatResponse();
+		}
 		void unknownErrorOccured(std::string const & errorMessage) OVERRIDE_IDENTIFIER {
 			m_owner->unknownErrorOccured(errorMessage);
 		}
