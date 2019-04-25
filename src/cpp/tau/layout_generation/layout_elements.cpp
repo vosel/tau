@@ -4,7 +4,7 @@
 // See LICENSE.txt for the licence information.
 
 #ifndef TAU_HEADERONLY
-#include "regions.h"
+#include "layout_elements.h"
 #endif
 
 #ifdef TAU_HEADERONLY
