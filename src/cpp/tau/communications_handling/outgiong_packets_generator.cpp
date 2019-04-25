@@ -123,7 +123,15 @@ namespace {
 			elementToUpdate, imageID.getValue());
 		sendData(toSend);
 	}
-
+	
+	LINKAGE_RESTRICTION void OutgiongPacketsGenerator::sendPacket_ClearImageRefForElement(common::ElementID const & elementToUpdate)
+	{
+		std::string toSend = generatePacketData(
+			tau::communications_handling::outgoing_packets_types::CLEAR_IMAGE_REF_FOR_ELEMENT_(),
+			elementToUpdate, "");
+		sendData(toSend);
+	}
+	
 	LINKAGE_RESTRICTION void OutgiongPacketsGenerator::sendPacket_GetLayoutElementPositionInfo(common::ElementID const & layout_element_id)
 	{
 		std::string toSend = generatePacketData(

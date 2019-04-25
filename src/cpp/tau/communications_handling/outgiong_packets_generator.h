@@ -25,8 +25,9 @@ public:
 	virtual void sendPacket_SetEnabled(common::ElementID const & layout_element_id, bool isActivated);
 	virtual void sendPacket_PutImage(common::ImageID const & imageID, common::ImageResource const & image);
 
-	// Sets a new image ID for one of the elements. This element will use this id to reference the image to be displayed.
+	// These two methods set and remove an image ID for a given elements:
 	virtual void sendPacket_SetImageForElement(common::ElementID const & elementToUpdate, common::ImageID const & imageID);
+	virtual void sendPacket_ClearImageRefForElement(common::ElementID const & elementToUpdate);
 
 	virtual void sendPacket_GetLayoutElementPositionInfo(common::ElementID const & layout_element_id);
 	virtual void sendPacket_SubscribeToSensor(size_t sensorIndex, size_t interval);
