@@ -16,6 +16,18 @@
 namespace tau {
 namespace layout_generation {
 
+LINKAGE_RESTRICTION void FramingElementWrapper::getDeclarationDump(simple_json_builder & target) const
+{
+	RectLayoutElement<FramingElementWrapper>::getDeclarationDump(target);
+	target.name(JsonFieldNames::Layout::LayoutData::FRAMING_ELEMENT_WRAPPER_());
+	simple_json_builder_object_scoped_guard guard_outer = target.getObjectScopedGuard();
+	{
+		target.name(JsonFieldNames::Layout::LayoutData::FramingElementWrapper::WRAPPED_SUBELEMENT_());
+		simple_json_builder_object_scoped_guard guard_inner = target.getObjectScopedGuard();
+		m_wrapped.get()->getDeclarationDump(target);
+	}
+}
+
 LINKAGE_RESTRICTION EvenlySplitLayoutElementsContainer::EvenlySplitLayoutElementsContainer(bool elementsAboveAndBelowEachOther):
 	LayoutElementsContainer(elementsAboveAndBelowEachOther)
 {}

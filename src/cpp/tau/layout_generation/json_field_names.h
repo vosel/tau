@@ -27,6 +27,7 @@ struct JsonFieldNames
 			static const char * BUTTON_OBJECT_()	{ static const char * result = "ButtonObject";	return result; }
 			static const char * VOID_SPACE_OBJECT_(){ static const char * result = "VoidSpaceObject"; return result; }
 			static const char * CONTAINER_OBJECT_() { static const char * result = "ContainerObject"; return result; }
+			static const char * FRAMING_ELEMENT_WRAPPER_() { static const char * result = "FrameAround"; return result; }
 			static const char * TEXT_BOX_OBJECT_()	{ static const char * result = "TextBoxObject";	return result; }
 			static const char * CLIENT_INPUT_OBJECT_(){ static const char * result = "ClientInputObject"; return result; }
 			static const char * IMAGE_BOX_OBJECT_() { static const char * result = "ImageBoxObject"; return result; }
@@ -50,6 +51,9 @@ struct JsonFieldNames
 					static const char * FIRST_SUBREGION_()	{ static const char * result = "firstSubregion";	return result; }
 					static const char * SECOND_SUBREGION_() { static const char * result = "secondSubregion"; return result; }
 				};
+			};
+			struct FramingElementWrapper{
+				static const char * WRAPPED_SUBELEMENT_()	{ static const char * result = "wrapped";	return result; }
 			};
 			struct TextBoxObject{
 				static const char * TEXT_()					{ static const char * result = TEXT_VARIABLE_ALIAS_(); return result; }

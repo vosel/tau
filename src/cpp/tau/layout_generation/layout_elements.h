@@ -69,6 +69,16 @@ template <typename FinalChildType>
 		}
 	};
 
+class FramingElementWrapper:
+	public RectLayoutElement<FramingElementWrapper>
+{
+	my_shared_ptr<AbstractLayoutElement>::MyInternalType m_wrapped;
+public:
+	template <typename T>
+	FramingElementWrapper(const T & toWrap) : m_wrapped(my_shared_ptr<T>::createInstance(toWrap)) {};
+	virtual void getDeclarationDump(simple_json_builder & target) const;
+};
+
 class EvenlySplitLayoutElementsContainer:
 	public LayoutElementsContainer<EvenlySplitLayoutElementsContainer>
 {
