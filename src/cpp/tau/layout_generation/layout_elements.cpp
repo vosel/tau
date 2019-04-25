@@ -242,7 +242,7 @@ LINKAGE_RESTRICTION void ButtonLayoutElement::getDeclarationDump(simple_json_bui
 			.name(JsonFieldNames::Layout::LayoutData::ButtonObject::IS_ENABLED_())
 			.pushBoolValue(m_isEnabled);
 
-		if (m_valuesToInformServerAbout.size() > 0){
+		if (m_valuesToInformServerAbout.size() > 0) {
 			target.name(JsonFieldNames::Layout::LayoutData::ButtonObject::INFORM_SERVER_ABOUT_VALUES_());
 			{
 				simple_json_builder_array_scoped_guard guard = target.getArrayScopedGuard();
