@@ -11,7 +11,10 @@ namespace common {
 
 
 // This class is a base for all the image resources that are sent
-// to client as a byte stream.
+// to client as a byte stream. The format of the data in this 
+// stream depends on the type of an image (it may be raw bitmap 
+// buffer, text data for svg object, data read from the normal
+// image file (png, jpg, bmp, e.t.c.)
 class ImageResource
 {
 public:
