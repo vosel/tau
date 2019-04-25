@@ -50,6 +50,13 @@ LINKAGE_RESTRICTION void simple_json_builder::preAppendValue()
 	}
 }
 
+LINKAGE_RESTRICTION void simple_json_builder::assertNoError() const
+{
+	if (errorMessage.size() > 0) {
+		throw std::runtime_error(errorMessage);
+	}
+}
+
 LINKAGE_RESTRICTION simple_json_builder & simple_json_builder::startObject()
 {
 	preAppendValue();	
@@ -73,7 +80,8 @@ LINKAGE_RESTRICTION simple_json_builder & simple_json_builder::endObject()
 {
 	result << '}';
 	if (nestedJsonObjects.top() != InsideObject) {
-		throw std::runtime_error("JsonGenerator trying to close an object at unexpected moment (probably, the order of closing operations is mixed up).");
+		//Note we can't throw an exception here, because this method is called from the destructor of the guard object (see above). Throwing from destructors should be avoided, so we are just storing an error here and will throw it later.
+		errorMessage = "JsonGenerator trying to close an object at unexpected moment (probably, the order of closing operations is mixed up).";
 	}
 	nestedJsonObjects.pop();
 	is_at_start_of_block = false;
@@ -82,6 +90,7 @@ LINKAGE_RESTRICTION simple_json_builder & simple_json_builder::endObject()
 
 LINKAGE_RESTRICTION simple_json_builder & simple_json_builder::startArray()
 {
+	assertNoError();
 	preAppendValue();
 	result << '[';
 	nestedJsonObjects.push(InsideArray);
@@ -93,7 +102,8 @@ LINKAGE_RESTRICTION simple_json_builder & simple_json_builder::endArray()
 {
 	result << ']';
 	if (nestedJsonObjects.top() != InsideArray) {
-		throw std::runtime_error("JsonGenerator trying to close an array at unexpected moment (probably, the order of closing operations is mixed up).");
+		//Note we can't throw an exception here, because this method is called from the destructor of the guard object (see above). Throwing from destructors should be avoided, so we are just storing an error here and will throw it later.
+		errorMessage = "JsonGenerator trying to close an array at unexpected moment (probably, the order of closing operations is mixed up).";
 	}
 	nestedJsonObjects.pop();
 	is_at_start_of_block = false;
@@ -102,6 +112,7 @@ LINKAGE_RESTRICTION simple_json_builder & simple_json_builder::endArray()
 
 LINKAGE_RESTRICTION simple_json_builder & simple_json_builder::name(std::string const & name)
 {
+	assertNoError();
 	if (nestedJsonObjects.top() == InsideObject) {
 		addCommaIfNeeded();
 	} else {
@@ -113,6 +124,7 @@ LINKAGE_RESTRICTION simple_json_builder & simple_json_builder::name(std::string 
 
 LINKAGE_RESTRICTION simple_json_builder & simple_json_builder::pushDoubleValue(double value)
 {
+	assertNoError();
 	preAppendValue();
 	result << value;
 	return *this;
@@ -120,6 +132,7 @@ LINKAGE_RESTRICTION simple_json_builder & simple_json_builder::pushDoubleValue(d
 
 LINKAGE_RESTRICTION simple_json_builder & simple_json_builder::pushIntValue(int value)
 {
+	assertNoError();
 	preAppendValue();
 	result << value;
 	return *this;
@@ -127,6 +140,7 @@ LINKAGE_RESTRICTION simple_json_builder & simple_json_builder::pushIntValue(int 
 
 LINKAGE_RESTRICTION simple_json_builder & simple_json_builder::pushBoolValue(bool value)
 {
+	assertNoError();
 	preAppendValue();
 	result << (value ? "true" : "false");
 	return *this;
@@ -134,6 +148,7 @@ LINKAGE_RESTRICTION simple_json_builder & simple_json_builder::pushBoolValue(boo
 
 LINKAGE_RESTRICTION simple_json_builder & simple_json_builder::pushStringValue(std::string const & value)
 {
+	assertNoError();
 	preAppendValue();
 	result << '\"' << value << '\"';
 	return *this;
@@ -141,6 +156,7 @@ LINKAGE_RESTRICTION simple_json_builder & simple_json_builder::pushStringValue(s
 
 LINKAGE_RESTRICTION std::string simple_json_builder::getResult()
 {
+	assertNoError();
 	return result.str();
 }
 } // namespace layout_generation

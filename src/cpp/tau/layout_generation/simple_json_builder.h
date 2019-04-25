@@ -32,12 +32,14 @@ class simple_json_builder
 {
 	enum CursorPosition {InsideObject, InsideArray};
 	std::stack<CursorPosition> nestedJsonObjects;
+	std::string errorMessage;
 
 	std::stringstream result;
 	bool is_at_start_of_block;
 
 	void addCommaIfNeeded();
 	void preAppendValue();
+	void assertNoError() const;
 public:
 	simple_json_builder();
 
