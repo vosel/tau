@@ -227,6 +227,29 @@ LINKAGE_RESTRICTION TextInputLayoutElement & TextInputLayoutElement::initialValu
 	return *this;
 }
 
+namespace {
+void appendBackgroundInfoIfNeeded(simple_json_builder & target,
+	std::string const & backgroundTypeName, BackgroundInfo const & backgroundToStore)
+{
+	if (!backgroundToStore.isValid) {
+		return;
+	}
+	target.name(backgroundTypeName);
+	simple_json_builder_object_scoped_guard guard = target.getObjectScopedGuard();
+	target
+		.name(JsonFieldNames::ElementBackgoroundDrawableAttributes::TYPE_())
+		.pushStringValue(JsonFieldNames::ElementBackgoroundDrawableType::MONOCOLOR_());
+	target
+		.name(JsonFieldNames::ElementBackgoroundDrawableAttributes::PARAMETERISATION_());
+	{
+		simple_json_builder_object_scoped_guard guard = target.getObjectScopedGuard();
+		target.name(JsonFieldNames::COLOR_CHANNEL_R_()).pushIntValue(backgroundToStore.data.m_r);
+		target.name(JsonFieldNames::COLOR_CHANNEL_G_()).pushIntValue(backgroundToStore.data.m_g);
+		target.name(JsonFieldNames::COLOR_CHANNEL_B_()).pushIntValue(backgroundToStore.data.m_b);
+	}
+}
+}
+
 LINKAGE_RESTRICTION void ButtonLayoutElement::getDeclarationDump(simple_json_builder & target) const
 {
 	RectLayoutElement::getDeclarationDump(target);
@@ -256,6 +279,11 @@ LINKAGE_RESTRICTION void ButtonLayoutElement::getDeclarationDump(simple_json_bui
 				.name(JsonFieldNames::Layout::LayoutData::ButtonObject::SWITCH_LAYOUT_ON_CLICK_())
 				.pushStringValue(m_switchToAnotherLayoutPageID);
 		}
+		appendBackgroundInfoIfNeeded(target, JsonFieldNames::Layout::LayoutData::ButtonObject::CUSTOM_BACKGROUND_(), m_customBackground);
+		appendBackgroundInfoIfNeeded(target, JsonFieldNames::Layout::LayoutData::ButtonObject::PRESSED_DOWN_BACKGROUND_(), m_customBackgroundOnClick);
+		if (m_imageID.getValue().size() > 0) {
+			target.name(JsonFieldNames::Layout::LayoutData::ButtonObject::IMAGE_ID_()).pushStringValue(m_imageID.getValue());
+		}
 	}
 }
 
@@ -274,6 +302,24 @@ LINKAGE_RESTRICTION ButtonLayoutElement & ButtonLayoutElement::informServerAbout
 LINKAGE_RESTRICTION ButtonLayoutElement & ButtonLayoutElement::note(std::string const & text)
 {
 	m_text = text;
+	return *this;
+}
+
+LINKAGE_RESTRICTION ButtonLayoutElement & ButtonLayoutElement::imageID(common::ImageID const & imageID)
+{
+	m_imageID = imageID;
+	return *this;
+}
+
+LINKAGE_RESTRICTION ButtonLayoutElement & ButtonLayoutElement::background(BackgroundInfo const & background)
+{
+	m_customBackground = background;
+	return *this;
+}
+
+LINKAGE_RESTRICTION ButtonLayoutElement & ButtonLayoutElement::pressedDownBackground(BackgroundInfo const & background)
+{
+	m_customBackgroundOnClick = background;
 	return *this;
 }
 

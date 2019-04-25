@@ -271,20 +271,47 @@ public:
 	TextInputLayoutElement & setLengthLimit(size_t limit);
 };
 
+struct ColorChannels
+{
+	int m_r;
+	int m_g;
+	int m_b;
+	ColorChannels()
+		: m_r(0), m_g(0), m_b(0) {};
+	ColorChannels(int r, int g, int b)
+		: m_r(r), m_g(g), m_b(b) {};
+	ColorChannels(ColorChannels const & other)
+		: m_r(other.m_r), m_g(other.m_g), m_b(other.m_b) {};
+};
+
+struct BackgroundInfo
+{
+	bool isValid;
+	ColorChannels data;
+	BackgroundInfo(): isValid(false) {};
+	BackgroundInfo(ColorChannels const & color): isValid(true), data(color) {};
+};
+
 class ButtonLayoutElement:
 	public UserInteractionElement<ButtonLayoutElement>
 {
 	std::string m_text;
-
+	BackgroundInfo m_customBackground;
+	BackgroundInfo m_customBackgroundOnClick;
+	
 	std::vector<common::ElementID> m_valuesToInformServerAbout;
 	common::LayoutPageID m_switchToAnotherLayoutPageID;
+	common::ImageID m_imageID;
 public:
-	ButtonLayoutElement() : m_switchToAnotherLayoutPageID("") {};
+	ButtonLayoutElement() : m_switchToAnotherLayoutPageID(""), m_imageID("") {};
 
 	ButtonLayoutElement & switchToAnotherLayoutPageOnClick(common::LayoutPageID const & targetLayoutPageID);
 	ButtonLayoutElement & informServerAboutValueOnClick(common::ElementID const & elementIdForValueInput);
 	ButtonLayoutElement & note(std::string const & text);
-
+	ButtonLayoutElement & imageID(common::ImageID const & imageID);
+	ButtonLayoutElement & background(BackgroundInfo const & background);
+	ButtonLayoutElement & pressedDownBackground(BackgroundInfo const & background);
+	
 	virtual void getDeclarationDump(simple_json_builder & target) const;
 };
 }; // namespace tau::layout_generation

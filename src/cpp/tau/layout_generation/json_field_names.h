@@ -37,6 +37,9 @@ struct JsonFieldNames
 				static const char * TEXT_()							{ static const char * result = TEXT_VARIABLE_ALIAS_();	return result; }
 				static const char * SWITCH_LAYOUT_ON_CLICK_()		{ static const char * result = "switchLayoutOnClick";		return result; }
 				static const char * INFORM_SERVER_ABOUT_VALUES_()	{ static const char * result = "informServerAboutValues"; return result; }
+				static const char * CUSTOM_BACKGROUND_()	{ static const char * result = "background"; return result; }
+				static const char * PRESSED_DOWN_BACKGROUND_()	{ static const char * result = "pressedDownBackground"; return result; }
+				static const char * IMAGE_ID_()	                    { static const char * result = "imageID"; return result; }
 			};
 			struct VoidSpaceObject{};
 			struct ContainerObject{
@@ -96,6 +99,19 @@ struct JsonFieldNames
 			};
 		};
 	};
+	struct ElementBackgoroundDrawableAttributes {
+		static const char * TYPE_()	{ static const char * result = "bgType"; return result; }
+		static const char * PARAMETERISATION_()	{ static const char * result = "params"; return result; }
+		
+	};
+	struct ElementBackgoroundDrawableType {
+		static const char * MONOCOLOR_()	{ static const char * result = "monocolor"; return result; }
+	};
+
+	static const char * COLOR_CHANNEL_R_() {static const char * result = "r"; return result; }
+	static const char * COLOR_CHANNEL_G_() {static const char * result = "g"; return result; }
+	static const char * COLOR_CHANNEL_B_() {static const char * result = "b"; return result; }
+	
 	private: // reused string constants
 		static const char * ID_ALIAS_()				 {static const char * result = "id"; return result; }
 		static const char * TEXT_VARIABLE_ALIAS_()   {static const char * result = "text"; return result; }
