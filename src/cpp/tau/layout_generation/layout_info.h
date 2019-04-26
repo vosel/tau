@@ -7,6 +7,7 @@
 
 #include "layout_elements.h"
 #include <algorithm>
+#include <vector>
 namespace tau {
 namespace layout_generation {
 
@@ -32,6 +33,7 @@ private:
 	std::string m_title;
 	common::LayoutID m_wholeLayoutID;
 	std::vector<LayoutPage> m_elements;
+	std::vector<common::ImageID> m_imageReferences;
 public:
 	LayoutInfo();
 	LayoutInfo & pushLayoutPage(const LayoutPage & infoToPush);
@@ -39,6 +41,7 @@ public:
 	LayoutInfo & setStartLayoutPage(common::LayoutPageID const & layoutPageId);
 	LayoutInfo & setHeight(int height);
 	LayoutInfo & setID(common::LayoutID const & id);
+	LayoutInfo & addImageReference(common::ImageID const & id);
 	std::string getJson() const;
 };
 

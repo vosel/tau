@@ -67,6 +67,12 @@ LINKAGE_RESTRICTION LayoutInfo & LayoutInfo::setID(common::LayoutID const & id)
 	return *this;
 }
 
+LINKAGE_RESTRICTION LayoutInfo & LayoutInfo::addImageReference(common::ImageID const & id)
+{
+	m_imageReferences.push_back(id);
+	return *this;
+}
+
 LINKAGE_RESTRICTION LayoutInfo & LayoutInfo::pushLayoutPage(const LayoutPage & infoToPush)
 {
 	m_elements.push_back(infoToPush);
@@ -90,6 +96,15 @@ LINKAGE_RESTRICTION std::string LayoutInfo::getJson() const
 		}
 		if (common::getStringRef(m_wholeLayoutID).size() > 0) {
 			generator.name(JsonFieldNames::ID_()).pushStringValue(m_wholeLayoutID);
+		}
+		if (m_imageReferences.size() > 0) {
+			generator.name(JsonFieldNames::IMAGE_REFERENCES_ARRAY_());
+			{
+				simple_json_builder_array_scoped_guard guard(generator);
+				for (size_t i = 0; i < m_imageReferences.size(); ++i) {
+					generator.pushStringValue(m_imageReferences[i]);
+				}
+			}
 		}
 		generator.name(JsonFieldNames::LAYOUTS_ARRAY_());
 		{

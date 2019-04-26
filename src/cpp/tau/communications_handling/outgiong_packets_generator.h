@@ -29,6 +29,14 @@ public:
 	virtual void sendPacket_SetImageForElement(common::ElementID const & elementToUpdate, common::ImageID const & imageID);
 	virtual void sendPacket_ClearImageRefForElement(common::ElementID const & elementToUpdate);
 
+	// These two methods allow the server to manage lifetimes of the image buffers on the client.
+	// When there is no references to the image on the client side, it is assumed that the image is no longer needed.
+	// So, the client could remove the image in order to free up the device resources.
+	// The layout-level references to images is a mechanism, which allows the server to tell the client
+	// that the image could still be needed in the future and should not be deleted.
+	virtual void sendPacket_AddLayoutLevelImageReference(common::ImageID const & imageID);
+	virtual void sendPacket_ClearLayoutLevelImageReference(common::ImageID const & imageID);
+
 	virtual void sendPacket_GetLayoutElementPositionInfo(common::ElementID const & layout_element_id);
 	virtual void sendPacket_SubscribeToSensor(size_t sensorIndex, size_t interval);
 	virtual void sendPacket_UnsubscribeFromSensor(size_t sensorIndex);

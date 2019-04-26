@@ -17,6 +17,7 @@ struct JsonFieldNames
     static const char * TITLE_()                           { static const char * result = "title";                  return result; }
     static const char * ID_()                              { static const char * result = ID_ALIAS_();              return result; }
     static const char * LAYOUTS_ARRAY_()                   { static const char * result = "layouts";                return result; }
+    static const char * IMAGE_REFERENCES_ARRAY_()          { static const char * result = "images";                 return result; }
     struct Layout{
         static const char * LAYOUT_ID_()                   { static const char * result = "layoutID";               return result; }
         static const char * WIDTH_()                       { static const char * result = "layoutWidth";            return result; }

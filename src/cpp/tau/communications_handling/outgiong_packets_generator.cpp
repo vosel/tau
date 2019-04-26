@@ -132,6 +132,22 @@ namespace {
 		sendData(toSend);
 	}
 	
+	LINKAGE_RESTRICTION void OutgiongPacketsGenerator::sendPacket_AddLayoutLevelImageReference(common::ImageID const & imageID)
+	{
+		std::string toSend = generatePacketData(
+			tau::communications_handling::outgoing_packets_types::ADD_LAYOUT_IMAGE_REF_(),
+			imageID, "");
+		sendData(toSend);
+	}
+
+	LINKAGE_RESTRICTION void OutgiongPacketsGenerator::sendPacket_ClearLayoutLevelImageReference(common::ImageID const & imageID)
+	{
+		std::string toSend = generatePacketData(
+			tau::communications_handling::outgoing_packets_types::CLEAR_LAYOUT_IMAGE_REF_(),
+			imageID, "");
+		sendData(toSend);
+	}
+
 	LINKAGE_RESTRICTION void OutgiongPacketsGenerator::sendPacket_GetLayoutElementPositionInfo(common::ElementID const & layout_element_id)
 	{
 		std::string toSend = generatePacketData(

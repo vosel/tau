@@ -89,6 +89,8 @@ namespace communications_handling {
         static const char * PUT_IMAGE_()                         { static const char * result = "PutImage";                return result; }
         static const char * SET_IMAGE_FOR_ELEM_()                { static const char * result = "SetImageRefForElem";      return result; }
         static const char * CLEAR_IMAGE_REF_FOR_ELEMENT_()       { static const char * result = "ClearImageRefForElem";    return result; }
+        static const char * ADD_LAYOUT_IMAGE_REF_()              { static const char * result = "AddLayoutImageRef";       return result; }
+        static const char * CLEAR_LAYOUT_IMAGE_REF_()            { static const char * result = "ClearLayoutImageRef";     return result; }
         static const char * GET_LAYOUT_ELEM_POSITION_()          { static const char * result = "GetLayoutElemPosition";   return result; }
         static const char * SUBSCRIBE_TO_SENSOR_()               { static const char * result = "SubscribeToSensor";       return result; }
         static const char * UNSUBSCRIBE_FROM_SENSOR_()           { static const char * result = "UnsubscribeFromSensor";   return result; }
