@@ -31,7 +31,7 @@ LINKAGE_RESTRICTION void LayoutPage::dumpToJson(simple_json_builder & target) co
 	{
 		simple_json_builder_object_scoped_guard guard = target.getObjectScopedGuard();
 		m_rootLayoutElement.get()->getDeclarationDump(target);
-	}	
+	}
 }
 
 LINKAGE_RESTRICTION LayoutPage & LayoutPage::height(int height)
@@ -81,7 +81,7 @@ LINKAGE_RESTRICTION std::string LayoutInfo::getJson() const
 		generator.name(JsonFieldNames::VERSION_()).pushIntValue(4);
 		if (common::getStringRef(m_startLayoutPageID).size() > 0) {
 			generator.name(JsonFieldNames::STARTING_LAYOUT_()).pushStringValue(m_startLayoutPageID);
-		}	
+		}
 		if (m_height > 0) {
 			generator.name(JsonFieldNames::HEIGHT_()).pushIntValue(m_height);
 		}
@@ -90,7 +90,7 @@ LINKAGE_RESTRICTION std::string LayoutInfo::getJson() const
 		}
 		if (common::getStringRef(m_wholeLayoutID).size() > 0) {
 			generator.name(JsonFieldNames::ID_()).pushStringValue(m_wholeLayoutID);
-		}		
+		}
 		generator.name(JsonFieldNames::LAYOUTS_ARRAY_());
 		{
 			simple_json_builder_array_scoped_guard guard(generator);
