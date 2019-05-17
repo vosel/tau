@@ -36,6 +36,7 @@ public:
 	virtual void onPacketReceived_ImageUpdated(common::ImageID const & imageID);
 
 	virtual void onPacketReceived_LayoutElementPosition(common::ElementID const & imageID, size_t x, size_t y, size_t width, size_t height);
+	virtual void onPacketReceived_LayoutElementImageSizeInfo(common::ElementID const & imageID, size_t width, size_t height);
 	virtual void onPacketReceived_SensorsDataUpdate(common::SensorData const & data);
 	
 	virtual void onPacketReceived_HeartbeatResponse();

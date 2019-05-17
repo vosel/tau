@@ -25,6 +25,7 @@ namespace communications_handling {
             LayoutPageSwitched,
             ImageUpdated,
             LayoutElementPositionInfo,
+            LayoutElementImageSizeInfo,
             SensorsDataUpdate,
             HeartbeatResponse,
             UnknownPacketType
@@ -66,6 +67,7 @@ namespace communications_handling {
         
         static const char * IMAGE_UPDATED_()                            { static const char * result = "ImageUpdated";                  return result; }
         static const char * LAYOUT_ELEMENT_POSITION_INFO_()             { static const char * result = "LayoutElementPositionInfo";     return result; }
+        static const char * LAYOUT_ELEMENT_IMAGE_SIZE_INFO_()           { static const char * result = "LayoutElementImgSizeInfo";      return result; }
         
         static const char * SENSORS_DATA_UPDATE_()                      { static const char * result = "SensorsDataUpdate";             return result; }
         

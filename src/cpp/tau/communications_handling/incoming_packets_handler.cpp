@@ -112,6 +112,13 @@ LINKAGE_RESTRICTION void IncomingPacketsHandler::onPacketReceived(
 				onPacketReceived_LayoutElementPosition(common::ElementID(layoutElementID), x, y, width, height);
 			}
 			break;
+		case incoming_packets_types::LayoutElementImageSizeInfo: {
+				size_t width = 0, height = 0;
+				std::stringstream stream(additionalData);
+				stream >> width >> height;
+				onPacketReceived_LayoutElementImageSizeInfo(common::ElementID(layoutElementID), width, height);
+			}
+			break;
 		case incoming_packets_types::SensorsDataUpdate: {
 				common::SensorData data;
 				std::stringstream stream(additionalData);
@@ -193,6 +200,9 @@ LINKAGE_RESTRICTION void IncomingPacketsHandler::onPacketReceived_ImageUpdated(c
 {}
 
 LINKAGE_RESTRICTION void IncomingPacketsHandler::onPacketReceived_LayoutElementPosition(common::ElementID const & imageID, size_t x, size_t y, size_t width, size_t height)
+{}
+
+LINKAGE_RESTRICTION void IncomingPacketsHandler::onPacketReceived_LayoutElementImageSizeInfo(common::ElementID const & imageID, size_t width, size_t height)
 {}
 
 LINKAGE_RESTRICTION void IncomingPacketsHandler::onPacketReceived_HeartbeatResponse()
