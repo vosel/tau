@@ -84,7 +84,7 @@ LINKAGE_RESTRICTION std::string LayoutInfo::getJson() const
 	simple_json_builder generator;
 	{
 		simple_json_builder_object_scoped_guard guard(generator);
-		generator.name(JsonFieldNames::VERSION_()).pushIntValue(5);
+		generator.name(JsonFieldNames::VERSION_()).pushIntValue(6);
 		if (common::getStringRef(m_startLayoutPageID).size() > 0) {
 			generator.name(JsonFieldNames::STARTING_LAYOUT_()).pushStringValue(m_startLayoutPageID);
 		}
